@@ -41,9 +41,9 @@
                     </div>
                 </div> --}}
                 <h4 class="mb-0">
-                    <span class="count">{{\App\Models\Patient::countActivePatient()}}</span>
+                    <span class="count">{{\App\Models\Girl::countActiveGirl()}}</span>
                 </h4>
-                <p class="text-light">Patients</p>
+                <p class="text-light">Girls</p>
 
                 <div class="chart-wrapper px-0" style="height:70px;" height="70">
                     {{-- <canvas id="widgetChart1"></canvas> --}}
@@ -71,9 +71,9 @@
                     </div>
                 </div> --}}
                 <h4 class="mb-0">
-                    <span class="count">{{\App\Models\MedicalRecord::countActiveMedical()}}</span>
+                    <span class="count">{{\App\Models\Event::countActiveEvent()}}</span>
                 </h4>
-                <p class="text-light">MedicalRecord</p>
+                <p class="text-light">Events</p>
 
                 <div class="chart-wrapper px-0" style="height:70px;" height="70">
                     {{-- <canvas id="widgetChart2"></canvas> --}}
@@ -100,9 +100,9 @@
                     </div>
                 </div> --}}
                 <h4 class="mb-0">
-                    <span class="count">{{\App\Models\LabTest::countActiveLabTest()}}</span>
+                    <span class="count">{{\App\Models\Progress::countActiveProgress()}}</span>
                 </h4>
-                <p class="text-light">LabTests</p>
+                <p class="text-light">Progresses</p>
 
                 <div class="chart-wrapper px-3" style="height:70px;" height="70">
                     {{-- <canvas id="widgetChart4"></canvas> --}}
@@ -129,9 +129,9 @@
                     </div>
                 </div> --}}
                 <h4 class="mb-0">
-                    <span class="count">{{\App\Models\LabResult::countActiveLab()}}</span>
+                    <span class="count">{{\App\Models\Material::countActiveMaterial()}}</span>
                 </h4>
-                <p class="text-light">Lab Results</p>
+                <p class="text-light">Materials</p>
 
             </div>
 
@@ -158,154 +158,9 @@
                     </div>
                 </div> --}}
                 <h4 class="mb-0">
-                    <span class="count">{{\App\Models\LabTestOrder::countActiveLabTestOrder()}}</span>
+                    <span class="count">{{\App\Models\Skill::countActiveSkill()}}</span>
                 </h4>
-                <p class="text-light">Lab Test Orders</p>
-
-                <div class="chart-wrapper px-3" style="height:70px;" height="70">
-                    {{-- <canvas id="widgetChart4"></canvas> --}}
-                </div>
-
-            </div>
-        </div>
-    </div>
-    <!--/.col-->
-
-    <div class="col-sm-6 col-lg-3">
-        <div class="card text-white bg-flat-color-4">
-            <div class="card-body pb-0">
-                {{-- <div class="dropdown float-right">
-                    <button class="btn bg-transparent dropdown-toggle theme-toggle text-light" type="button" id="dropdownMenuButton4" data-toggle="dropdown">
-                        <i class="fa fa-cog"></i>
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton4">
-                        <div class="dropdown-menu-content">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
-                    </div>
-                </div> --}}
-                <h4 class="mb-0">
-                    <span class="count">{{\App\Models\Diagnosis::countActiveDiagnosis()}}</span>
-                </h4>
-                <p class="text-light">Diagnosis</p>
-
-                <div class="chart-wrapper px-3" style="height:70px;" height="70">
-                    {{-- <canvas id="widgetChart4"></canvas> --}}
-                </div>
-
-            </div>
-        </div>
-    </div>
-    <!--/.col-->
-
-    <div class="col-sm-6 col-lg-3">
-        <div class="card text-white bg-flat-color-4">
-            <div class="card-body pb-0">
-                {{-- <div class="dropdown float-right">
-                    <button class="btn bg-transparent dropdown-toggle theme-toggle text-light" type="button" id="dropdownMenuButton4" data-toggle="dropdown">
-                        <i class="fa fa-cog"></i>
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton4">
-                        <div class="dropdown-menu-content">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
-                    </div>
-                </div> --}}
-                <h4 class="mb-0">
-                    <span class="count">{{\App\Models\Drug::countActiveDrug()}}</span>
-                </h4>
-                <p class="text-light">Drugs</p>
-
-                <div class="chart-wrapper px-3" style="height:70px;" height="70">
-                    {{-- <canvas id="widgetChart4"></canvas> --}}
-                </div>
-
-            </div>
-        </div>
-    </div>
-    <!--/.col-->
-
-    <div class="col-sm-6 col-lg-3">
-        <div class="card text-white bg-flat-color-4">
-            <div class="card-body pb-0">
-                {{-- <div class="dropdown float-right">
-                    <button class="btn bg-transparent dropdown-toggle theme-toggle text-light" type="button" id="dropdownMenuButton4" data-toggle="dropdown">
-                        <i class="fa fa-cog"></i>
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton4">
-                        <div class="dropdown-menu-content">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
-                    </div>
-                </div> --}}
-                <h4 class="mb-0">
-                    <span class="count">{{\App\Models\DrugPrescription::countActiveDrug()}}</span>
-                </h4>
-                <p class="text-light">Drug Prescription</p>
-
-                <div class="chart-wrapper px-3" style="height:70px;" height="70">
-                    {{-- <canvas id="widgetChart4"></canvas> --}}
-                </div>
-
-            </div>
-        </div>
-    </div>
-    <!--/.col-->
-
-    <div class="col-sm-6 col-lg-3">
-        <div class="card text-white bg-flat-color-4">
-            <div class="card-body pb-0">
-                {{-- <div class="dropdown float-right">
-                    <button class="btn bg-transparent dropdown-toggle theme-toggle text-light" type="button" id="dropdownMenuButton4" data-toggle="dropdown">
-                        <i class="fa fa-cog"></i>
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton4">
-                        <div class="dropdown-menu-content">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
-                    </div>
-                </div> --}}
-                <h4 class="mb-0">
-                    <span class="count">{{\App\Models\Clinic::countActiveClinic()}}</span>
-                </h4>
-                <p class="text-light">Clinics</p>
-
-                <div class="chart-wrapper px-3" style="height:70px;" height="70">
-                    {{-- <canvas id="widgetChart4"></canvas> --}}
-                </div>
-
-            </div>
-        </div>
-    </div>
-    <!--/.col-->
-
-    <div class="col-sm-6 col-lg-3">
-        <div class="card text-white bg-flat-color-4">
-            <div class="card-body pb-0">
-                {{-- <div class="dropdown float-right">
-                    <button class="btn bg-transparent dropdown-toggle theme-toggle text-light" type="button" id="dropdownMenuButton4" data-toggle="dropdown">
-                        <i class="fa fa-cog"></i>
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton4">
-                        <div class="dropdown-menu-content">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
-                    </div>
-                </div> --}}
-                <h4 class="mb-0">
-                    <span class="count">{{\App\Models\Appointment::countActiveAppointment()}}</span>
-                </h4>
-                <p class="text-light">Appointment</p>
+                <p class="text-light">Skills</p>
 
                 <div class="chart-wrapper px-3" style="height:70px;" height="70">
                     {{-- <canvas id="widgetChart4"></canvas> --}}
@@ -344,7 +199,5 @@
         </div>
     </div>
     <!--/.col-->
-
-    
 
 @endsection

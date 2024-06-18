@@ -21,6 +21,7 @@ class CreateProgressTable extends Migration
             $table->string('skills_attained');
             $table->boolean('finish_without_hiv');
             $table->boolean('standalone_in_community');
+            $table->enum('status',['active','inactive'])->default('inactive');
             $table->timestamps();
         });
     }

@@ -11,5 +11,11 @@ class Skill extends Model
 
     protected $fillable = [
         'skill_name',
+        'status',
     ];
+
+    public static function countActiveSkill()
+    {
+        return self::where('status', 'active')->count();
+    }
 }

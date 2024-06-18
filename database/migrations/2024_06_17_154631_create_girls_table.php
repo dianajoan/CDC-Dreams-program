@@ -22,6 +22,7 @@ class CreateGirlsTable extends Migration
             $table->date('date_of_birth');
             $table->string('village');
             $table->boolean('schooling_status');
+            $table->enum('status',['active','inactive'])->default('inactive');
             $table->timestamps();
         });
     }

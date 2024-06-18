@@ -19,6 +19,7 @@ class CreateEventsTable extends Migration
             $table->string('learning_outcomes');
             $table->date('start_date');
             $table->date('end_date');
+            $table->enum('status',['active','inactive'])->default('inactive');
             $table->timestamps();
         });
     }

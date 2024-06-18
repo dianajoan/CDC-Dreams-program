@@ -16,6 +16,7 @@ class CreateSkillsTable extends Migration
         Schema::create('skills', function (Blueprint $table) {
             $table->id();
             $table->string('skill_name');
+            $table->enum('status',['active','inactive'])->default('inactive');
             $table->timestamps();
         });
     }

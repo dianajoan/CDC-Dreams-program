@@ -14,10 +14,16 @@ class Event extends Model
         'learning_outcomes',
         'start_date',
         'end_date',
+        'status',
     ];
 
     public function progresses()
     {
         return $this->hasMany(Progress::class);
+    }
+
+    public static function countActiveEvent()
+    {
+        return self::where('status', 'active')->count();
     }
 }

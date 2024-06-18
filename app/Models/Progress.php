@@ -16,6 +16,7 @@ class Progress extends Model
         'skills_attained',
         'finish_without_hiv',
         'standalone_in_community',
+        'status',
     ];
 
     public function girl()
@@ -26,5 +27,10 @@ class Progress extends Model
     public function event()
     {
         return $this->belongsTo(Event::class);
+    }
+
+    public static function countActiveProgress()
+    {
+        return self::where('status', 'active')->count();
     }
 }

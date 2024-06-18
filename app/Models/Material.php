@@ -12,5 +12,11 @@ class Material extends Model
     protected $fillable = [
         'material_name',
         'target_audience',
+        'status',
     ];
+
+    public static function countActiveMaterial()
+    {
+        return self::where('status', 'active')->count();
+    }
 }

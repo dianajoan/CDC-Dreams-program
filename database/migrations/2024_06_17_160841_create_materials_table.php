@@ -17,6 +17,7 @@ class CreateMaterialsTable extends Migration
             $table->id();
             $table->string('material_name');
             $table->string('target_audience');
+            $table->enum('status',['active','inactive'])->default('inactive');
             $table->timestamps();
         });
     }
