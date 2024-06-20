@@ -15,6 +15,9 @@ class Event extends Model
         'start_date',
         'end_date',
         'status',
+        'location',
+        'slug',
+        'photo',
     ];
 
     public function progresses()
@@ -25,5 +28,11 @@ class Event extends Model
     public static function countActiveEvent()
     {
         return self::where('status', 'active')->count();
+    }
+
+    // Define the getEventBySlug method
+    public static function getEventBySlug($slug)
+    {
+        return self::where('slug', $slug)->first();
     }
 }

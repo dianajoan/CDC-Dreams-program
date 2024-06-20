@@ -33,6 +33,39 @@
                         @enderror
                       </div>
 
+                      <div class="form-group">
+                        <label for="inputPhoto" class="col-form-label">Upload Photo<span class="text-danger">*</span></label>
+                        <div class="input-group">
+                          <input class="form-control" type="file" name="photo" id="uploadImage" value="{{$user->photo}}">
+                        </div>
+                        <div id="holder" style="margin-top:15px;max-height:100px;"></div>
+                          @error('photo')
+                          <span class="text-danger">{{$message}}</span>
+                          @enderror
+                        </div>
+        
+                        <div class="form-group">
+                          <img src="{{ Storage::url($user->photo) }}" height="75" width="75" alt="" />
+                        </div>
+  
+                        @php 
+                        $roles=DB::table('users')->select('role')->where('id',$user->id)->get();
+                        // dd($roles);
+                        @endphp
+                        <div class="form-group">
+                            <label for="role" class="col-form-label">Role</label>
+                            <select name="role" class="form-control" required>
+                                <option value="">-----Select Role-----</option>
+                                @foreach($roles as $role)
+                                    <option value="{{$role->role}}" {{(($role->role=='admin') ? 'selected' : '')}}>Admin</option>
+                                    <option value="{{$role->role}}" {{(($role->role=='user') ? 'selected' : '')}}>User</option>
+                                @endforeach
+                            </select>
+                          @error('role')
+                          <span class="text-danger">{{$message}}</span>
+                          @enderror
+                          </div>
+
                         <div class="form-group">
                           <label for="status" class="col-form-label">Status</label>
                           <select name="status" class="form-control" required>

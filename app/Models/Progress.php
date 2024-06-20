@@ -17,6 +17,8 @@ class Progress extends Model
         'finish_without_hiv',
         'standalone_in_community',
         'status',
+        'slug',
+        'photo',
     ];
 
     public function girl()
@@ -32,5 +34,11 @@ class Progress extends Model
     public static function countActiveProgress()
     {
         return self::where('status', 'active')->count();
+    }
+
+    // Define the getProgressBySlug method
+    public static function getProgressBySlug($slug)
+    {
+        return self::where('slug', $slug)->first();
     }
 }

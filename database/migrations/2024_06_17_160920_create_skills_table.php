@@ -17,6 +17,8 @@ class CreateSkillsTable extends Migration
             $table->id();
             $table->string('skill_name');
             $table->enum('status',['active','inactive'])->default('inactive');
+            $table->string('slug')->unique();
+            $table->string('photo')->nullable();
             $table->timestamps();
         });
     }

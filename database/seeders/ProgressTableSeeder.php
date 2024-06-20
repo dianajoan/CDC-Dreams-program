@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class ProgressTableSeeder extends Seeder
 {
@@ -20,9 +21,11 @@ class ProgressTableSeeder extends Seeder
                 'event_id' => 1,
                 'lessons_attended' => '5',
                 'skills_attained' => 'Basic Laravel skills',
-                'finish_without_hiv' => true,
-                'standalone_in_community' => false,
+                'finish_without_hiv' => 'Yes',
+                'standalone_in_community' => 'Yes',
                 'status' => 'active',
+                'slug' => Str::slug('Basic'),
+                'photo' => 'public/images/basic.jpg',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -31,9 +34,11 @@ class ProgressTableSeeder extends Seeder
                 'event_id' => 2,
                 'lessons_attended' => '3',
                 'skills_attained' => 'Advanced Laravel techniques',
-                'finish_without_hiv' => true,
-                'standalone_in_community' => true,
+                'finish_without_hiv' => 'Yes',
+                'standalone_in_community' => 'Yes',
                 'status' => 'inactive',
+                'slug' => Str::slug('Advanced'),
+                'photo' => 'public/images/advanced.jpg',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],

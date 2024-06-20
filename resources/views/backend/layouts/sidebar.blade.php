@@ -18,7 +18,15 @@
                 </li>
 
                 <li class="menu-item-has-children dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-image"></i>Girls</a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-image"></i>Banners</a>
+                    <ul class="sub-menu children dropdown-menu">
+                        <li><a href="{{ route('banner.index') }}">View Banners</a></li>
+                        <li><a href="{{ route('banner.create') }}">Add Banner</a></li>
+                    </ul>
+                </li>
+
+                <li class="menu-item-has-children dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-user"></i>Girls</a>
                     <ul class="sub-menu children dropdown-menu">
                         <li><a href="{{ route('girls.index') }}">View Girls</a></li>
                         <li><a href="{{ route('girls.create') }}">Add Girl</a></li>
@@ -27,7 +35,7 @@
 
 
                 <li class="menu-item-has-children dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-folder"></i>Events</a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-building"></i>Events</a>
                     <ul class="sub-menu children dropdown-menu">
                         <li><a href="{{ route('events.index') }}">View Events</a></li>
                         <li><a href="{{ route('events.create') }}">Add Event</a></li>
@@ -35,7 +43,7 @@
                 </li>
 
                 <li class="menu-item-has-children dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-folder"></i>Progresses</a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-user"></i>Progresses</a>
                     <ul class="sub-menu children dropdown-menu">
                         <li><a href="{{ route('progresses.index') }}">View Progresses</a></li>
                         <li><a href="{{ route('progresses.create') }}">Add Progress</a></li>
@@ -57,14 +65,16 @@
                         <li><a href="{{ route('skills.create') }}">Add Skill</a></li>
                     </ul>
                 </li>
+
+                <li>
+                    <a href="{{ route('reports') }}"> <i class="menu-icon fa fa-file"></i>Reports </a>
+                </li>
                 
                 <li class="menu-item-has-children dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-user"></i>Settings</a>
                     <ul class="sub-menu children dropdown-menu">
                         <li><a href="{{ route('users.index') }}">Manage Users</a></li>
                         <li><a href="{{ route('users.create') }}">Add User</a></li>
-                        <li><a href="{{ route('roles.index') }}">Manage Roles</a></li>
-                        <li><a href="{{ route('roles.create') }}">Add Roles</a></li>
                     </ul>
                 </li>
 

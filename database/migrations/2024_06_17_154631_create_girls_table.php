@@ -18,11 +18,13 @@ class CreateGirlsTable extends Migration
             $table->string('name');
             $table->string('address');
             $table->enum('age_group', ['10-14', '15-19']);
-            $table->string('hiv_status');
+            $table->enum('hiv_status', ['positive', 'negative']);
             $table->date('date_of_birth');
             $table->string('village');
-            $table->boolean('schooling_status');
+            $table->enum('schooling_status', ['in_school', 'out_of_school']);
             $table->enum('status',['active','inactive'])->default('inactive');
+            $table->string('slug')->unique();
+            $table->string('photo')->nullable();
             $table->timestamps();
         });
     }

@@ -5,10 +5,9 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-use Socialite;
-use App\User;
-use Auth;
+
 class LoginController extends Controller
 {
     /*
@@ -37,38 +36,93 @@ class LoginController extends Controller
      * @return void
      */
 
-    public function credentials(Request $request){
-        // dd($request->request);
-        return ['email'=>$request->email,'password'=>$request->password,'status'=>'active'];
-    }
-    public function __construct()
-    {
-        $this->middleware('guest')->except('logout');
-    }
-
-    // public function redirect($provider)
-    // {
-    //     // dd($provider);
-    //  return Socialite::driver($provider)->redirect();
-    // }
+     public function __construct()
+     {
+         $this->middleware('guest')->except('logout');
+     }
  
-    // public function Callback($provider)
-    // {
-    //     $userSocial =   Socialite::driver($provider)->stateless()->user();
-    //     $users      =   User::where(['email' => $userSocial->getEmail()])->first();
-    //     // dd($users);
-    //     if($users){
-    //         Auth::login($users);
-    //         return redirect('/')->with('success','You are login from '.$provider);
-    //     }else{
-    //         $user = User::create([
-    //             'name'          => $userSocial->getName(),
-    //             'email'         => $userSocial->getEmail(),
-    //             'image'         => $userSocial->getAvatar(),
-    //             'provider_id'   => $userSocial->getId(),
-    //             'provider'      => $provider,
-    //         ]);
-    //      return redirect()->route('home');
-    //     }
-    // }
+     public function showLoginForm()
+     {
+         return view('auth.login');
+     }
+ 
+     public function login(Request $request)
+     {
+         $this->validateLogin($request);
+ 
+         if (method_exists($this, 'hasTooManyLoginAttempts') &&
+             $this->hasTooManyLoginAttempts($request)) {
+             $this->fireLockoutEvent($request);
+ 
+             return $this->sendLockoutResponse($request);
+         }
+ 
+         if ($this->attemptLogin($request)) {
+             return $this->sendLoginResponse($request);
+         }
+ 
+         $this->incrementLoginAttempts($request);
+ 
+         return $this->sendFailedLoginResponse($request);
+     }
+ 
+     protected function credentials(Request $request)
+     {
+         return $request->only($this->username(), 'password');
+     }
+ 
+     protected function validateLogin(Request $request)
+     {
+         $request->validate([
+             $this->username() => 'required|string',
+             'password' => 'required|string',
+         ]);
+     }
+ 
+     protected function attemptLogin(Request $request)
+     {
+         return $this->guard()->attempt(
+             $this->credentials($request), $request->filled('remember')
+         );
+     }
+ 
+     protected function sendLoginResponse(Request $request)
+     {
+         $request->session()->regenerate();
+ 
+         $this->clearLoginAttempts($request);
+ 
+         return $this->authenticated($request, $this->guard()->user())
+                 ?: redirect()->intended($this->redirectPath());
+     }
+ 
+     protected function sendFailedLoginResponse(Request $request)
+     {
+         return redirect()->back()
+             ->withInput($request->only($this->username(), 'remember'))
+             ->withErrors([
+                 $this->username() => [trans('auth.failed')],
+             ]);
+     }
+ 
+     public function logout(Request $request)
+     {
+         $this->guard()->logout();
+ 
+         $request->session()->invalidate();
+ 
+         $request->session()->regenerateToken();
+ 
+         return redirect('/');
+     }
+ 
+     public function username()
+     {
+         return 'email';
+     }
+ 
+     protected function guard()
+     {
+         return Auth::guard();
+     }
 }

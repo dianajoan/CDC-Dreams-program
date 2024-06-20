@@ -1,5 +1,5 @@
 @extends('backend.layouts.master')
-@section('title') Patients @endsection
+@section('title') Events @endsection
 @section('main-content')
 @include('backend.layouts.notification')
 
@@ -7,7 +7,7 @@
   <div class="col-sm-4">
       <div class="page-header float-left">
           <div class="page-title">
-              <h1>Patients</h1>
+              <h1>Events</h1>
           </div>
       </div>
   </div>
@@ -16,7 +16,7 @@
           <div class="page-title">
               <ol class="breadcrumb text-right">
                 <li><a href="{{ route('admin')}}">Dashboard</a></li>
-                <li><a href="{{ route('patients.create')}}">Add Patient</a></li>
+                <li><a href="{{ route('events.create')}}">Add Event</a></li>
                 <li class="active">View</li>
               </ol>
           </div>
@@ -34,34 +34,35 @@
                       <strong class="card-title">View</strong>
                   </div>
                   <div class="card-body">
-                    @if(count($patients)>0)
+                    @if(count($events)>0)
                       <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
                           <thead>
                               <tr>
                                 <th>ID</th>
-                                <th>Name</th>
-                                <th>Gender</th>
-                                <th>Phone</th>
-                                <th>Next of Kin Name</th>
-                                <th>Phone</th>
+                                <th>Event Type</th>
+                                <th>Photo</th>
+                                <th>Start Date</th>
+                                <th>End Date</th>
+                                <th>Location</th>
                                 <th>Status</th>
                                 <th>Action</th>
                               </tr>
                           </thead>
                           <tbody>
-                            @foreach($patients as $data)  
+                            @foreach($events as $data)  
                               <tr>
                                 <td>{{$data->id}}</td>
-                                <td>{{$data->first_name}} - {{$data->last_name}}</td>
+                                <td>{{$data->event_type}}</td>
                                 <td>
-                                    @if($data->gender=='male')
-                                        <span class="badge badge-success">{{$data->gender}}</span>
+                                    @if($data->photo)
+                                        <img src="{{ Storage::url($data->photo) }}" class="img-fluid zoom" style="max-width:80px" alt="{{ Storage::url($data->photo) }}">
                                     @else
-                                        <span class="badge badge-warning">{{$data->gender}}</span>
+                                        <img src="{{asset('backend/img/thumbnail-default.jpg')}}" class="img-fluid zoom" style="max-width:100%" alt="avatar.png">
                                     @endif
                                 </td>
-                                <td>{{$data->phone_number}}</td>
-                                <td>{{$data->next_of_kin_name}}</td>
+                                <td>{{$data->start_date}}</td>
+                                <td>{{$data->end_date}}</td>
+                                <td>{{$data->location}}</td>
                                 <td>
                                     @if($data->status=='active')
                                         <span class="badge badge-success">{{$data->status}}</span>
@@ -70,8 +71,8 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <a href="{{route('patients.edit',$data->id)}}" class="btn btn-primary btn-sm float-left mr-1" style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" title="edit" data-placement="bottom"><i class="fa fa-edit"></i></a>
-                                <form method="POST" action="{{route('patients.destroy',[$data->id])}}">
+                                    <a href="{{route('events.edit',$data->id)}}" class="btn btn-primary btn-sm float-left mr-1" style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" title="edit" data-placement="bottom"><i class="fa fa-edit"></i></a>
+                                <form method="POST" action="{{route('events.destroy',[$data->id])}}">
                                   @csrf 
                                   @method('delete')
                                       <button class="btn btn-danger btn-sm dltBtn" data-id={{$data->id}} style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" data-placement="bottom" title="Delete"><i class="fa fa-trash"></i></button>
@@ -82,7 +83,7 @@
                           </tbody>
                       </table>
                       @else
-                      <h6 class="text-center">No patient found!!! Please add patient</h6>
+                      <h6 class="text-center">No event found!!! Please add event</h6>
                     @endif
                   </div>
               </div>

@@ -18,6 +18,8 @@ class Girl extends Model
         'village',
         'schooling_status',
         'status',
+        'slug',
+        'photo',
     ];
 
     public function progress()
@@ -28,5 +30,11 @@ class Girl extends Model
     public static function countActiveGirl()
     {
         return self::where('status', 'active')->count();
+    }
+
+    // Define the getGirlBySlug method
+    public static function getGirlBySlug($slug)
+    {
+        return self::where('slug', $slug)->first();
     }
 }

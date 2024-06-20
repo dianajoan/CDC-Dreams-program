@@ -16,11 +16,13 @@ class DatabaseSeeder extends Seeder
         $this->call([
             AdminRoleSeeder::class,
             UsersTableSeeder::class,
+            BannersTableSeeder::class,
             GirlsTableSeeder::class,
             EventsTableSeeder::class,
             ProgressTableSeeder::class,
             MaterialsTableSeeder::class,
             SkillsTableSeeder::class,
+            ReportSeeder::class,
         ]);
     }
 }

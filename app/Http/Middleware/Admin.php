@@ -9,12 +9,15 @@ class Admin
 {
     public function handle($request, Closure $next)
     {
-        $user = Auth::user();
+        if (!Auth::check()) {
+            return redirect()->route('login');
+        }
 
-        if ($user && $user->hasRole('admin')) {
+        if ($request->user()->role == 'admin') {
             return $next($request);
         } else {
-            return redirect()->route('home')->withErrors(['error' => 'You do not have permission to access this page']);
+            request()->session()->flash('error', 'You do not have permission to access this page');
+            return redirect()->route($request->user()->role);
         }
     }
 }

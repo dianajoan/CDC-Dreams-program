@@ -16,8 +16,10 @@ class CreateMaterialsTable extends Migration
         Schema::create('materials', function (Blueprint $table) {
             $table->id();
             $table->string('material_name');
-            $table->string('target_audience');
+            $table->enum('target_age_group', ['10-14', '15-19']);
             $table->enum('status',['active','inactive'])->default('inactive');
+            $table->string('slug')->unique();
+            $table->string('photo')->nullable();
             $table->timestamps();
         });
     }

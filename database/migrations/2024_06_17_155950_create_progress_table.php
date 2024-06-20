@@ -19,9 +19,11 @@ class CreateProgressTable extends Migration
             $table->foreignId('event_id')->constrained();
             $table->string('lessons_attended');
             $table->string('skills_attained');
-            $table->boolean('finish_without_hiv');
-            $table->boolean('standalone_in_community');
+            $table->string('finish_without_hiv');
+            $table->string('standalone_in_community');
             $table->enum('status',['active','inactive'])->default('inactive');
+            $table->string('slug')->unique();
+            $table->string('photo')->nullable();
             $table->timestamps();
         });
     }

@@ -1,11 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\GirlController;
-use App\Http\Controllers\EventController;
-use App\Http\Controllers\ProgressController;
-use App\Http\Controllers\MaterialController;
-use App\Http\Controllers\SkillController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,29 +13,65 @@ use App\Http\Controllers\SkillController;
 |
 */
 
-// use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Auth;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Frontend Routes
 
-Auth::routes(['register' => false]);
+Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
+Route::post('login', 'Auth\LoginController@login');
+Route::post('logout', 'Auth\LoginController@logout')->name('logout');
+
+Route::get('/home', 'FrontendController@index');
+
+Route::get('/','FrontendController@home')->name('home');
+
+// Girl
+Route::get('/girl','FrontendController@girl')->name('girl');
+Route::get('/girl-detail/{slug}','FrontendController@girlDetail')->name('girl.detail');
+
+// Event
+Route::get('/event','FrontendController@event')->name('event');
+Route::get('/event-detail/{slug}','FrontendController@eventDetail')->name('event.detail');
+
+// Progress
+Route::get('/progress','FrontendController@progress')->name('progress');
+Route::get('/progress-detail/{slug}','FrontendController@progressDetail')->name('progress.detail');
+
+// Material
+Route::get('/material','FrontendController@material')->name('material');
+Route::get('/material-detail/{slug}','FrontendController@materialDetail')->name('material.detail');
+
+
+// Skill
+Route::get('/skill','FrontendController@skill')->name('skill');
+Route::get('/skill-detail/{slug}','FrontendController@skillDetail')->name('skill.detail');
 
 // Backend section start
-Route::group(['prefix' => '/admin', 'middleware' => ['auth', 'admin']], function() {
-    Route::get('/','AdminController@index')->name('admin');
+Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function() {
+    Route::get('/', 'AdminController@index')->name('admin');
 
     // Routes for Users
-    Route::resource('/users', 'UsersController');
+    Route::resource('users', 'UsersController');
 
-    // Routes for Roles
-    Route::resource('/roles', 'UserRoleController');
+    // Banner
+    Route::resource('banner', 'BannerController');
 
-    Route::resource('girls', GirlController::class);
-    Route::resource('events', EventController::class);
-    Route::resource('progresses', ProgressController::class);
-    Route::resource('materials', MaterialController::class);
-    Route::resource('skills', SkillController::class);
+    // Girls
+    Route::resource('girls', 'GirlController');
+
+    // Events
+    Route::resource('events', 'EventController');
+
+    // Progresses
+    Route::resource('progresses', 'ProgressController');
+
+    // Materials
+    Route::resource('materials', 'MaterialController');
+
+    // Skills
+    Route::resource('skills', 'SkillController');
+
+    // Reports
+    Route::get('reports', 'ReportsController@index')->name('reports');
+
 
 });

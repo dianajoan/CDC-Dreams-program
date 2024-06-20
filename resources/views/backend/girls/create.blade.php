@@ -1,5 +1,5 @@
 @extends('backend.layouts.master')
-@section('title') Add Patient @endsection
+@section('title') Add Girl @endsection
 @section('main-content')
 @include('backend.layouts.notification')
 
@@ -18,7 +18,7 @@
                   <div class="page-title">
                       <ol class="breadcrumb text-right">
                           <li><a href="{{ route('admin')}}">Dashboard</a></li>
-                          <li><a href="{{ route('patients.index') }}">View</a></li>
+                          <li><a href="{{ route('girls.index') }}">View</a></li>
                           <li class="active">Add</li>
                       </ol>
                   </div>
@@ -37,8 +37,8 @@
               <strong>Add</strong>
           </div>
           <div class="card-body card-block">
-            <form method="post" action="{{route('patients.store')}}">
-              {{csrf_field()}}
+            <form action="{{ route('girls.store') }}" method="POST" enctype="multipart/form-data">
+              @csrf
 
               @if ($errors->any())
                 <div class="alert alert-danger">
@@ -51,36 +51,39 @@
               @endif
 
               <div class="form-group">
-                <label for="inputTitle" class="col-form-label">File Number</label>
-                <input id="inputTitle" type="text" name="file_number" placeholder=""  value="{{old('file_number')}}" class="form-control" required>
-                @error('file_number')
+                <label for="inputTitle" class="col-form-label">Full Name</label>
+                <input id="inputTitle" type="text" name="name" placeholder=""  value="{{old('name')}}" class="form-control" required>
+                @error('name')
                 <span class="text-danger">{{$message}}</span>
                 @enderror
               </div>
 
               <div class="form-group">
-                <label for="inputTitle" class="col-form-label">First Name</label>
-                <input id="inputTitle" type="text" name="first_name" placeholder=""  value="{{old('first_name')}}" class="form-control" required>
-                @error('first_name')
+                <label for="inputTitle" class="col-form-label">Address</label>
+                <input id="inputTitle" type="text" name="address" placeholder=""  value="{{old('address')}}" class="form-control" required>
+                @error('address')
                 <span class="text-danger">{{$message}}</span>
                 @enderror
               </div>
 
               <div class="form-group">
-                <label for="inputTitle" class="col-form-label">Last Name</label>
-                <input id="inputTitle" type="text" name="last_name" placeholder=""  value="{{old('last_name')}}" class="form-control" required>
-                @error('last_name')
+                <label for="age_group" class="col-form-label">Age Group</label>
+                <select name="age_group" class="form-control">
+                    <option value="10-14">10-14</option>
+                    <option value="15-19">15-19</option>
+                </select>
+                @error('age_group')
                 <span class="text-danger">{{$message}}</span>
                 @enderror
               </div>
 
               <div class="form-group">
-                <label for="inputTitle" class="col-form-label">Gender</label>
-                <select name="gender" class="form-control">
-                  <option value="male">Male</option>
-                  <option value="female">Female</option>
-              </select>
-                @error('gender')
+                <label for="hiv_status" class="col-form-label">HIV Status</label>
+                <select name="hiv_status" class="form-control">
+                  <option value="positive">Positive</option>
+                  <option value="negative">Negative</option>
+                </select>
+                @error('hiv_status')
                 <span class="text-danger">{{$message}}</span>
                 @enderror
               </div>
@@ -94,35 +97,33 @@
               </div>
 
               <div class="form-group">
-                <label for="inputTitle" class="col-form-label">Phone Number</label>
-                <input id="inputTitle" type="text" name="phone_number" placeholder=""  value="{{old('phone_number')}}" class="form-control" required>
-                @error('phone_number')
+                <label for="inputTitle" class="col-form-label">Village</label>
+                <input id="inputTitle" type="text" name="village" placeholder=""  value="{{old('village')}}" class="form-control" required>
+                @error('village')
                 <span class="text-danger">{{$message}}</span>
                 @enderror
               </div>
 
               <div class="form-group">
-                <label for="inputTitle" class="col-form-label">Next of Kin Name</label>
-                <input id="inputTitle" type="text" name="next_of_kin_name" placeholder=""  value="{{old('next_of_kin_name')}}" class="form-control" required>
-                @error('next_of_kin_name')
+                <label for="schooling_status" class="col-form-label">Schooling Status</label>
+                <select name="schooling_status" class="form-control">
+                    <option value="in_school">In School</option>
+                    <option value="out_of_school">Out of School</option>
+                </select>
+                @error('schooling_status')
                 <span class="text-danger">{{$message}}</span>
                 @enderror
               </div>
 
               <div class="form-group">
-                <label for="inputTitle" class="col-form-label">Next of Kin Relationship</label>
-                <input id="inputTitle" type="text" name="next_of_kin_relationship" placeholder=""  value="{{old('next_of_kin_relationship')}}" class="form-control" required>
-                @error('next_of_kin_relationship')
-                <span class="text-danger">{{$message}}</span>
-                @enderror
-              </div>
-
-              <div class="form-group">
-                <label for="inputTitle" class="col-form-label">Next of Kin Phone Number</label>
-                <input id="inputTitle" type="text" name="next_of_kin_phone_number" placeholder=""  value="{{old('next_of_kin_phone_number')}}" class="form-control" required>
-                @error('next_of_kin_phone_number')
-                <span class="text-danger">{{$message}}</span>
-                @enderror
+                <label for="inputPhoto" class="col-form-label">Upload Photo<span class="text-danger">*</span></label>
+                <div class="input-group">
+                  <input class="form-control" type="file" name="photo" id="uploadImage" required>
+                </div>
+                <div id="holder" style="margin-top:15px;max-height:100px;"></div>
+                  @error('photo')
+                  <span class="text-danger">{{$message}}</span>
+                  @enderror
               </div>
 
               <div class="form-group">
@@ -135,6 +136,7 @@
                 <span class="text-danger">{{$message}}</span>
                 @enderror
               </div>
+
               <div class="form-group mb-3">
                 <button type="reset" class="btn btn-warning">Reset</button>
                 <button class="btn btn-success" type="submit">Submit</button>
@@ -148,3 +150,14 @@
 </div>
 
 @endsection
+
+@push('scripts')
+
+<script src="//cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.ckeditor').ckeditor();
+    });
+</script>
+
+@endpush

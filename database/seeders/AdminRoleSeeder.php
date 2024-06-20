@@ -15,20 +15,25 @@ class AdminRoleSeeder extends Seeder
      */
     public function run()
     {
-        // Reset cached roles and permissions
-        app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
+        // Create roles
+        $adminRole = Role::firstOrCreate(['name' => 'admin']);
 
         // Create permissions
-        Permission::create(['name' => 'edit articles']);
-        Permission::create(['name' => 'delete articles']);
-        Permission::create(['name' => 'publish articles']);
-        Permission::create(['name' => 'unpublish articles']);
+        $permissions = [
+            'manage girls',
+            'manage events',
+            'manage progress',
+            'manage materials',
+            'manage skills',
+            'manage reports',
+        ];
 
-        // Create admin role and assign permissions
-        $adminRole = Role::create(['name' => 'admin']);
-        $adminRole->givePermissionTo('edit articles');
-        $adminRole->givePermissionTo('delete articles');
-        $adminRole->givePermissionTo('publish articles');
-        $adminRole->givePermissionTo('unpublish articles');
+        foreach ($permissions as $permission) {
+            Permission::firstOrCreate(['name' => $permission]);
+        }
+
+        // Assign permissions to roles
+        $adminRole->syncPermissions(Permission::all());
+
     }
 }

@@ -1,5 +1,5 @@
 @extends('backend.layouts.master')
-@section('title') Edit Patients @endsection
+@section('title') Edit Girls @endsection
 @section('main-content')
 @include('backend.layouts.notification')
 
@@ -18,7 +18,7 @@
                   <div class="page-title">
                       <ol class="breadcrumb text-right">
                           <li><a href="{{ route('admin')}}">Dashboard</a></li>
-                          <li><a href="{{ route('patients.index') }}">View</a></li>
+                          <li><a href="{{ route('girls.index') }}">View</a></li>
                           <li class="active">Edit</li>
                       </ol>
                   </div>
@@ -37,7 +37,7 @@
               <strong>Edit</strong>
           </div>
           <div class="card-body card-block">
-            <form method="post" action="{{route('patients.update',$patient->id)}}">
+            <form method="post" action="{{route('girls.update',$girl->id)}}" enctype="multipart/form-data">
               @csrf 
               @method('PATCH')
 
@@ -52,90 +52,97 @@
               @endif
 
               <div class="form-group">
-                <label for="inputTitle" class="col-form-label">File Number</label>
-                <input id="inputTitle" type="text" name="file_number" placeholder=""  value="{{$patient->file_number}}" class="form-control" required>
-                @error('file_number')
+                <label for="inputTitle" class="col-form-label">Full Name</label>
+                <input id="inputTitle" type="text" name="name" placeholder=""  value="{{$girl->name}}" class="form-control" required>
+                @error('name')
                 <span class="text-danger">{{$message}}</span>
                 @enderror
               </div>
 
               <div class="form-group">
-                <label for="inputTitle" class="col-form-label">First Name</label>
-                <input id="inputTitle" type="text" name="first_name" placeholder=""  value="{{$patient->first_name}}" class="form-control" required>
-                @error('first_name')
-                <span class="text-danger">{{$message}}</span>
-                @enderror
-              </div>
-
-              <div class="form-group">
-                <label for="inputTitle" class="col-form-label">Last Name</label>
-                <input id="inputTitle" type="text" name="last_name" placeholder=""  value="{{$patient->last_name}}" class="form-control" required>
-                @error('last_name')
-                <span class="text-danger">{{$message}}</span>
-                @enderror
-              </div>
-
-              <div class="form-group">
-                <label for="inputTitle" class="col-form-label">Gender</label>
-                <select name="gender" class="form-control">
-                  <option value="male" {{(($patient->gender=='male') ? 'selected' : '')}}>Male</option>
-                  <option value="female" {{(($patient->gender=='female') ? 'selected' : '')}}>Female</option>
+                <label for="age_group" class="col-form-label">Age Group</label>
+                <select name="age_group" class="form-control">
+                  <option value="10-14" {{(($girl->age_group=='10-14') ? 'selected' : '')}}>10-14</option>
+                  <option value="15-19" {{(($girl->age_group=='15-19') ? 'selected' : '')}}>15-19</option>
                 </select>
-                @error('gender')
+                @error('age_group')
                 <span class="text-danger">{{$message}}</span>
                 @enderror
               </div>
+
+              <div class="form-group">
+                <label for="hiv_status" class="col-form-label">HIV Status</label>
+                <select name="hiv_status" class="form-control">
+                  <option value="positive" {{(($girl->hiv_status=='10-14') ? 'selected' : '')}}>Positive</option>
+                  <option value="negative" {{(($girl->hiv_status=='15-19') ? 'selected' : '')}}>Negative</option>
+                </select>
+                @error('hiv_status')
+                <span class="text-danger">{{$message}}</span>
+                @enderror
+              </div>
+
+              <div class="form-group">
+                <label for="inputTitle" class="col-form-label">Address</label>
+                <input id="inputTitle" type="text" name="address" placeholder=""  value="{{$girl->address}}" class="form-control" required>
+                @error('address')
+                <span class="text-danger">{{$message}}</span>
+                @enderror
+              </div>
+
 
                <div class="form-group">
                 <label for="inputTitle" class="col-form-label">Date of Birth</label>
-                <input id="inputTitle" type="date" name="date_of_birth" placeholder=""  value="{{$patient->date_of_birth}}" class="form-control" required>
+                <input id="inputTitle" type="date" name="date_of_birth" placeholder=""  value="{{$girl->date_of_birth}}" class="form-control" required>
                 @error('date_of_birth')
                 <span class="text-danger">{{$message}}</span>
                 @enderror
               </div>
 
               <div class="form-group">
-                <label for="inputTitle" class="col-form-label">Phone NUmber</label>
-                <input id="inputTitle" type="text" name="phone_number" placeholder=""  value="{{$patient->phone_number}}" class="form-control" required>
-                @error('phone_number')
+                <label for="inputTitle" class="col-form-label">Village</label>
+                <input id="inputTitle" type="text" name="village" placeholder=""  value="{{$girl->village}}" class="form-control" required>
+                @error('village')
                 <span class="text-danger">{{$message}}</span>
                 @enderror
               </div>
 
               <div class="form-group">
-                <label for="inputTitle" class="col-form-label">Next of Kin Name</label>
-                <input id="inputTitle" type="text" name="next_of_kin_name" placeholder=""  value="{{$patient->next_of_kin_name}}" class="form-control" required>
-                @error('next_of_kin_name')
+                <label for="schooling_status" class="col-form-label">Schooling Status</label>
+                <select name="schooling_status" class="form-control">
+                  <option value="in_school" {{(($girl->schooling_status=='in_school') ? 'selected' : '')}}>In School</option>
+                  <option value="out_of_school" {{(($girl->schooling_status=='out_of_school') ? 'selected' : '')}}>Out of School</option>
+                </select>
+                @error('schooling_status')
                 <span class="text-danger">{{$message}}</span>
                 @enderror
               </div>
 
               <div class="form-group">
-                <label for="inputTitle" class="col-form-label">Next of Kin Relationhip</label>
-                <input id="inputTitle" type="text" name="next_of_kin_relationship" placeholder=""  value="{{$patient->next_of_kin_relationship}}" class="form-control" required>
-                @error('next_of_kin_relationship')
-                <span class="text-danger">{{$message}}</span>
-                @enderror
-              </div>
+                <label for="inputPhoto" class="col-form-label">Upload Photo<span class="text-danger">*</span></label>
+                <div class="input-group">
+                  <input class="form-control" type="file" name="photo" id="uploadImage" value="{{$girl->photo}}">
+                </div>
+                <div id="holder" style="margin-top:15px;max-height:100px;"></div>
+                  @error('photo')
+                  <span class="text-danger">{{$message}}</span>
+                  @enderror
+                </div>
 
-              <div class="form-group">
-                <label for="inputTitle" class="col-form-label">Next of Kin Phone Number</label>
-                <input id="inputTitle" type="text" name="next_of_kin_phone_number" placeholder=""  value="{{$patient->next_of_kin_phone_number}}" class="form-control" required>
-                @error('next_of_kin_phone_number')
-                <span class="text-danger">{{$message}}</span>
-                @enderror
-              </div>
+                <div class="form-group">
+                  <img src="{{ Storage::url($girl->photo) }}" height="75" width="75" alt="" />
+                </div>
 
               <div class="form-group">
                 <label for="status" class="col-form-label">Status</label>
                 <select name="status" class="form-control">
-                  <option value="active" {{(($patient->status=='active') ? 'selected' : '')}}>Active</option>
-                  <option value="inactive" {{(($patient->status=='inactive') ? 'selected' : '')}}>Inactive</option>
+                  <option value="active" {{(($girl->status=='active') ? 'selected' : '')}}>Active</option>
+                  <option value="inactive" {{(($girl->status=='inactive') ? 'selected' : '')}}>Inactive</option>
                 </select>
                 @error('status')
                 <span class="text-danger">{{$message}}</span>
                 @enderror
               </div>
+
               <div class="form-group mb-3">
                 <button class="btn btn-success" type="submit">Update</button>
               </div>
@@ -148,3 +155,14 @@
 </div>
 
 @endsection
+
+@push('scripts')
+
+<script src="//cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.ckeditor').ckeditor();
+    });
+</script>
+
+@endpush

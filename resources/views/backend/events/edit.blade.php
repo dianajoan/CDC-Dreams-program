@@ -1,5 +1,5 @@
 @extends('backend.layouts.master')
-@section('title') Edit Patients @endsection
+@section('title') Edit Events @endsection
 @section('main-content')
 @include('backend.layouts.notification')
 
@@ -18,7 +18,7 @@
                   <div class="page-title">
                       <ol class="breadcrumb text-right">
                           <li><a href="{{ route('admin')}}">Dashboard</a></li>
-                          <li><a href="{{ route('patients.index') }}">View</a></li>
+                          <li><a href="{{ route('events.index') }}">View</a></li>
                           <li class="active">Edit</li>
                       </ol>
                   </div>
@@ -37,7 +37,7 @@
               <strong>Edit</strong>
           </div>
           <div class="card-body card-block">
-            <form method="post" action="{{route('patients.update',$patient->id)}}">
+            <form method="post" action="{{route('events.update',$event->id)}}" enctype="multipart/form-data">
               @csrf 
               @method('PATCH')
 
@@ -52,85 +52,65 @@
               @endif
 
               <div class="form-group">
-                <label for="inputTitle" class="col-form-label">File Number</label>
-                <input id="inputTitle" type="text" name="file_number" placeholder=""  value="{{$patient->file_number}}" class="form-control" required>
-                @error('file_number')
+                <label for="inputTitle" class="col-form-label">Event Type</label>
+                <input id="inputTitle" type="text" name="event_type" placeholder=""  value="{{$event->event_type}}" class="form-control" required>
+                @error('event_type')
+                <span class="text-danger">{{$message}}</span>
+                @enderror
+              </div>
+
+                <div class="form-group">
+                  <label for="learning_outcomes">Learning Outcomes<span class="text-danger">*</span></label>
+                  <textarea id="learning_outcomes" name="learning_outcomes" class="form-control" required>{{ $event->learning_outcomes }}</textarea>
+                  @error('learning_outcomes')
+                      <span class="text-danger">{{ $message }}</span>
+                  @enderror
+              </div>
+
+              <div class="form-group">
+                <label for="inputTitle" class="col-form-label">Start Date</label>
+                <input id="inputTitle" type="date" name="start_date" placeholder=""  value="{{$event->start_date}}" class="form-control" required>
+                @error('start_date')
                 <span class="text-danger">{{$message}}</span>
                 @enderror
               </div>
 
               <div class="form-group">
-                <label for="inputTitle" class="col-form-label">First Name</label>
-                <input id="inputTitle" type="text" name="first_name" placeholder=""  value="{{$patient->first_name}}" class="form-control" required>
-                @error('first_name')
+                <label for="inputTitle" class="col-form-label">End Date</label>
+                <input id="inputTitle" type="date" name="end_date" placeholder=""  value="{{$event->end_date}}" class="form-control" required>
+                @error('end_date')
                 <span class="text-danger">{{$message}}</span>
                 @enderror
               </div>
 
               <div class="form-group">
-                <label for="inputTitle" class="col-form-label">Last Name</label>
-                <input id="inputTitle" type="text" name="last_name" placeholder=""  value="{{$patient->last_name}}" class="form-control" required>
-                @error('last_name')
-                <span class="text-danger">{{$message}}</span>
-                @enderror
-              </div>
+                <label for="inputPhoto" class="col-form-label">Upload Photo<span class="text-danger">*</span></label>
+                <div class="input-group">
+                  <input class="form-control" type="file" name="photo" id="uploadImage" value="{{$event->photo}}">
+                </div>
+                <div id="holder" style="margin-top:15px;max-height:100px;"></div>
+                  @error('photo')
+                  <span class="text-danger">{{$message}}</span>
+                  @enderror
+                </div>
 
-              <div class="form-group">
-                <label for="inputTitle" class="col-form-label">Gender</label>
-                <select name="gender" class="form-control">
-                  <option value="male" {{(($patient->gender=='male') ? 'selected' : '')}}>Male</option>
-                  <option value="female" {{(($patient->gender=='female') ? 'selected' : '')}}>Female</option>
-                </select>
-                @error('gender')
-                <span class="text-danger">{{$message}}</span>
-                @enderror
-              </div>
+                <div class="form-group">
+                  <img src="{{ Storage::url($event->photo) }}" height="75" width="75" alt="" />
+                </div>
 
-               <div class="form-group">
-                <label for="inputTitle" class="col-form-label">Date of Birth</label>
-                <input id="inputTitle" type="date" name="date_of_birth" placeholder=""  value="{{$patient->date_of_birth}}" class="form-control" required>
-                @error('date_of_birth')
-                <span class="text-danger">{{$message}}</span>
-                @enderror
-              </div>
-
-              <div class="form-group">
-                <label for="inputTitle" class="col-form-label">Phone NUmber</label>
-                <input id="inputTitle" type="text" name="phone_number" placeholder=""  value="{{$patient->phone_number}}" class="form-control" required>
-                @error('phone_number')
-                <span class="text-danger">{{$message}}</span>
-                @enderror
-              </div>
-
-              <div class="form-group">
-                <label for="inputTitle" class="col-form-label">Next of Kin Name</label>
-                <input id="inputTitle" type="text" name="next_of_kin_name" placeholder=""  value="{{$patient->next_of_kin_name}}" class="form-control" required>
-                @error('next_of_kin_name')
-                <span class="text-danger">{{$message}}</span>
-                @enderror
-              </div>
-
-              <div class="form-group">
-                <label for="inputTitle" class="col-form-label">Next of Kin Relationhip</label>
-                <input id="inputTitle" type="text" name="next_of_kin_relationship" placeholder=""  value="{{$patient->next_of_kin_relationship}}" class="form-control" required>
-                @error('next_of_kin_relationship')
-                <span class="text-danger">{{$message}}</span>
-                @enderror
-              </div>
-
-              <div class="form-group">
-                <label for="inputTitle" class="col-form-label">Next of Kin Phone Number</label>
-                <input id="inputTitle" type="text" name="next_of_kin_phone_number" placeholder=""  value="{{$patient->next_of_kin_phone_number}}" class="form-control" required>
-                @error('next_of_kin_phone_number')
-                <span class="text-danger">{{$message}}</span>
-                @enderror
-              </div>
+                <div class="form-group">
+                  <label for="inputTitle" class="col-form-label">Location</label>
+                  <input id="inputTitle" type="text" name="location" placeholder=""  value="{{$event->location}}" class="form-control" required>
+                  @error('location')
+                  <span class="text-danger">{{$message}}</span>
+                  @enderror
+                </div>
 
               <div class="form-group">
                 <label for="status" class="col-form-label">Status</label>
                 <select name="status" class="form-control">
-                  <option value="active" {{(($patient->status=='active') ? 'selected' : '')}}>Active</option>
-                  <option value="inactive" {{(($patient->status=='inactive') ? 'selected' : '')}}>Inactive</option>
+                  <option value="active" {{(($event->status=='active') ? 'selected' : '')}}>Active</option>
+                  <option value="inactive" {{(($event->status=='inactive') ? 'selected' : '')}}>Inactive</option>
                 </select>
                 @error('status')
                 <span class="text-danger">{{$message}}</span>
@@ -148,3 +128,14 @@
 </div>
 
 @endsection
+
+@push('scripts')
+
+<script src="//cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.ckeditor').ckeditor();
+    });
+</script>
+
+@endpush

@@ -1,5 +1,5 @@
 @extends('backend.layouts.master')
-@section('title') Edit Patients @endsection
+@section('title') Edit Skills @endsection
 @section('main-content')
 @include('backend.layouts.notification')
 
@@ -18,7 +18,7 @@
                   <div class="page-title">
                       <ol class="breadcrumb text-right">
                           <li><a href="{{ route('admin')}}">Dashboard</a></li>
-                          <li><a href="{{ route('patients.index') }}">View</a></li>
+                          <li><a href="{{ route('skills.index') }}">View</a></li>
                           <li class="active">Edit</li>
                       </ol>
                   </div>
@@ -37,7 +37,7 @@
               <strong>Edit</strong>
           </div>
           <div class="card-body card-block">
-            <form method="post" action="{{route('patients.update',$patient->id)}}">
+            <form method="post" action="{{route('skills.update',$skill->id)}}" enctype="multipart/form-data">
               @csrf 
               @method('PATCH')
 
@@ -52,85 +52,33 @@
               @endif
 
               <div class="form-group">
-                <label for="inputTitle" class="col-form-label">File Number</label>
-                <input id="inputTitle" type="text" name="file_number" placeholder=""  value="{{$patient->file_number}}" class="form-control" required>
-                @error('file_number')
+                <label for="inputTitle" class="col-form-label">Skill Name</label>
+                <input id="inputTitle" type="text" name="skill_name" placeholder=""  value="{{$skill->skill_name}}" class="form-control" required>
+                @error('skill_name')
                 <span class="text-danger">{{$message}}</span>
                 @enderror
               </div>
 
               <div class="form-group">
-                <label for="inputTitle" class="col-form-label">First Name</label>
-                <input id="inputTitle" type="text" name="first_name" placeholder=""  value="{{$patient->first_name}}" class="form-control" required>
-                @error('first_name')
-                <span class="text-danger">{{$message}}</span>
-                @enderror
-              </div>
+                <label for="inputPhoto" class="col-form-label">Upload Photo<span class="text-danger">*</span></label>
+                <div class="input-group">
+                  <input class="form-control" type="file" name="photo" id="uploadImage" value="{{$skill->photo}}">
+                </div>
+                <div id="holder" style="margin-top:15px;max-height:100px;"></div>
+                  @error('photo')
+                  <span class="text-danger">{{$message}}</span>
+                  @enderror
+                </div>
 
-              <div class="form-group">
-                <label for="inputTitle" class="col-form-label">Last Name</label>
-                <input id="inputTitle" type="text" name="last_name" placeholder=""  value="{{$patient->last_name}}" class="form-control" required>
-                @error('last_name')
-                <span class="text-danger">{{$message}}</span>
-                @enderror
-              </div>
-
-              <div class="form-group">
-                <label for="inputTitle" class="col-form-label">Gender</label>
-                <select name="gender" class="form-control">
-                  <option value="male" {{(($patient->gender=='male') ? 'selected' : '')}}>Male</option>
-                  <option value="female" {{(($patient->gender=='female') ? 'selected' : '')}}>Female</option>
-                </select>
-                @error('gender')
-                <span class="text-danger">{{$message}}</span>
-                @enderror
-              </div>
-
-               <div class="form-group">
-                <label for="inputTitle" class="col-form-label">Date of Birth</label>
-                <input id="inputTitle" type="date" name="date_of_birth" placeholder=""  value="{{$patient->date_of_birth}}" class="form-control" required>
-                @error('date_of_birth')
-                <span class="text-danger">{{$message}}</span>
-                @enderror
-              </div>
-
-              <div class="form-group">
-                <label for="inputTitle" class="col-form-label">Phone NUmber</label>
-                <input id="inputTitle" type="text" name="phone_number" placeholder=""  value="{{$patient->phone_number}}" class="form-control" required>
-                @error('phone_number')
-                <span class="text-danger">{{$message}}</span>
-                @enderror
-              </div>
-
-              <div class="form-group">
-                <label for="inputTitle" class="col-form-label">Next of Kin Name</label>
-                <input id="inputTitle" type="text" name="next_of_kin_name" placeholder=""  value="{{$patient->next_of_kin_name}}" class="form-control" required>
-                @error('next_of_kin_name')
-                <span class="text-danger">{{$message}}</span>
-                @enderror
-              </div>
-
-              <div class="form-group">
-                <label for="inputTitle" class="col-form-label">Next of Kin Relationhip</label>
-                <input id="inputTitle" type="text" name="next_of_kin_relationship" placeholder=""  value="{{$patient->next_of_kin_relationship}}" class="form-control" required>
-                @error('next_of_kin_relationship')
-                <span class="text-danger">{{$message}}</span>
-                @enderror
-              </div>
-
-              <div class="form-group">
-                <label for="inputTitle" class="col-form-label">Next of Kin Phone Number</label>
-                <input id="inputTitle" type="text" name="next_of_kin_phone_number" placeholder=""  value="{{$patient->next_of_kin_phone_number}}" class="form-control" required>
-                @error('next_of_kin_phone_number')
-                <span class="text-danger">{{$message}}</span>
-                @enderror
-              </div>
+                <div class="form-group">
+                  <img src="{{ Storage::url($skill->photo) }}" height="75" width="75" alt="" />
+                </div>
 
               <div class="form-group">
                 <label for="status" class="col-form-label">Status</label>
                 <select name="status" class="form-control">
-                  <option value="active" {{(($patient->status=='active') ? 'selected' : '')}}>Active</option>
-                  <option value="inactive" {{(($patient->status=='inactive') ? 'selected' : '')}}>Inactive</option>
+                  <option value="active" {{(($skill->status=='active') ? 'selected' : '')}}>Active</option>
+                  <option value="inactive" {{(($skill->status=='inactive') ? 'selected' : '')}}>Inactive</option>
                 </select>
                 @error('status')
                 <span class="text-danger">{{$message}}</span>

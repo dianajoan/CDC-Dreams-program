@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class SkillsTableSeeder extends Seeder
 {
@@ -16,26 +17,34 @@ class SkillsTableSeeder extends Seeder
     {
         DB::table('skills')->insert([
             [
-                'skill_name' => 'Laravel',
+                'skill_name' => 'Sewing',
                 'status' => 'active',
+                'slug' => Str::slug('Sewing'),
+                'photo' => 'public/images/sewing.jpg',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
-                'skill_name' => 'PHP',
+                'skill_name' => 'Cooking',
                 'status' => 'inactive',
+                'slug' => Str::slug('Cooking'),
+                'photo' => 'public/images/cooking.jpg',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
-                'skill_name' => 'JavaScript',
+                'skill_name' => 'Teaching',
                 'status' => 'active',
+                'slug' => Str::slug('Teaching'),
+                'photo' => 'public/images/teaching.jpg',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
-                'skill_name' => 'Vue.js',
+                'skill_name' => 'Driving',
                 'status' => 'inactive',
+                'slug' => Str::slug('Driving'),
+                'photo' => 'public/images/driving.jpg',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
