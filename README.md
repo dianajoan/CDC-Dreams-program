@@ -1,6 +1,29 @@
-## Comprehensive CDC Dreams Program Management System in Laravel
+# Comprehensive CDC Dreams Program Management System
 
-### Set up :
+## Project Overview
+The Comprehensive CDC Dreams Program Management System is designed to streamline the management and coordination of the CDC Dreams program, which focuses on empowering adolescent girls and young women (AGYW) to reduce HIV infections through education, mentorship, skills training, and support services.
+
+### Features
+- **Enrollment Management:** Capture attributes such as child name, address, age group, HIV status, date of birth, village, and schooling status.
+- **Event Scheduling:** Organize workshops and events with details like event type, learning outcomes, and start/end dates.
+- **Participant Progress Tracking:** Track participants' progress, including events attended, lessons attended, skills attained, and assessments.
+- **Educational Material Distribution:** Register and manage training materials targeted at different age groups.
+- **Skills Training:** Track which girl has attended which skill set or event.
+- **Reporting:** Generate comprehensive reports and dashboards on the program's impact.
+
+## Technologies Used
+- **Backend:** PHP (Laravel)
+- **Frontend:** HTML, CSS, JavaScript (Bootstrap)
+- **Reporting:** Chart.js
+- **Authentication:** Spatie Laravel Permission
+
+## Setup Instructions
+### Prerequisites
+- PHP >= 7.3
+- Composer
+- Node.js (for npm packages)
+
+### Installation
 
 1. Clone the repo and cd into it
 2. In your terminal ```composer install```
