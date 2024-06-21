@@ -41,16 +41,21 @@
                       </div>
 
                       <div class="form-group">
-                        <label for="inputPhoto" class="col-form-label">Upload Photo<span class="text-danger">*</span></label>
-                        <div class="input-group">
-                          <input class="form-control" type="file" name="photo" id="uploadImage" required>
-                        </div>
-                        <div id="holder" style="margin-top:15px;max-height:100px;"></div>
-                          @error('photo')
-                          <span class="text-danger">{{$message}}</span>
-                          @enderror
+                      <label for="inputPhoto" class="col-form-label">{{ __('sidebar.user_photo') }}</label>
+                      <div class="input-group">
+                          {{-- <span class="input-group-btn">
+                              <a id="lfm" data-input="thumbnail" data-preview="holder" class="btn btn-primary">
+                              <i class="fa fa-picture-o"></i> Choose
+                              </a>
+                          </span>
+                          <input id="thumbnail" class="form-control" type="text" name="photo" value="{{old('photo')}}"> --}}
+                          <input class="form-control" type="file" name="photo" required>
                       </div>
-
+                      <img id="holder" style="margin-top:15px;max-height:100px;">
+                        @error('photo')
+                        <span class="text-danger">{{$message}}</span>
+                        @enderror
+                      </div>
                       @php 
                       $roles=DB::table('users')->select('role')->get();
                       @endphp
@@ -58,15 +63,13 @@
                           <label for="role" class="col-form-label">{{ __('sidebar.user_role') }}</label>
                           <select name="role" class="form-control" required>
                               <option value="">-----Select Role-----</option>
-                              @foreach($roles as $role)
-                                  <option value="{{$role->role}}">{{$role->role}}</option>
-                              @endforeach
+                              <option value="admin">Admin</option>
+                              <option value="user">User</option>
                           </select>
                         @error('role')
                         <span class="text-danger">{{$message}}</span>
                         @enderror
                         </div>
-                     
                         <div class="form-group">
                           <label for="status" class="col-form-label">{{ __('sidebar.user_status') }}</label>
                           <select name="status" class="form-control" required>
@@ -94,3 +97,9 @@
 
 @endsection
 
+@push('scripts')
+<script src="/vendor/laravel-filemanager/js/stand-alone-button.js"></script>
+<script>
+    $('#lfm').filemanager('image');
+</script>
+@endpush

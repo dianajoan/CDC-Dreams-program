@@ -19,7 +19,7 @@ The Comprehensive CDC Dreams Program Management System is designed to streamline
 
 ## Setup Instructions
 ### Prerequisites
-- PHP >= 7.3
+- PHP >= 8.3
 - Composer
 - Node.js (for npm packages)
 
@@ -37,7 +37,8 @@ The Comprehensive CDC Dreams Program Management System is designed to streamline
 10. run command[laravel file manager]:-  ```php artisan storage:link```
 11. Edit ```.env``` file :- remove APP_URL
 10. ```php artisan serve``` or use virtual host
-11. Visit ```localhost:8000/admin``` in your browser
+11. Visit ```localhost:8000``` in your browser for frontend
+11. Visit ```localhost:8000/admin``` in your browser for backend
 12. Visit /admin if you want to access the admin panel. Admin Email/Password: ```admin@gmail.com```/```2222```. 
 
 <p style="text-align:center">Thank You so much for your time !!!</p>

@@ -41,8 +41,9 @@
                                 <th>{{ __('sidebar.user_number') }}</th>
                                 <th>{{ __('sidebar.user_name') }}</th>
                                 <th>{{ __('sidebar.user_email') }}</th>
-                                <th>Photo</th>
+                                <th>{{ __('sidebar.user_photo') }}</th>
                                 <th>{{ __('sidebar.user_joined_date') }}</th>
+                                <th>{{ __('sidebar.user_role') }}</th>
                                 <th>{{ __('sidebar.user_status') }}</th>
                                 <th>{{ __('sidebar.user_action') }}</th>
                               </tr>
@@ -55,12 +56,13 @@
                                 <td>{{$user->email}}</td>
                                 <td>
                                     @if($user->photo)
-                                        <img src="{{ Storage::url($user->photo) }}" class="img-fluid zoom" style="max-width:80px" alt="{{ Storage::url($user->photo) }}">
+                                        <img src="{{ Storage::url($user->photo) }}" class="img-fluid rounded-circle" style="max-width:50px" alt="{{ Storage::url($user->photo) }}">
                                     @else
-                                        <img src="{{asset('backend/img/thumbnail-default.jpg')}}" class="img-fluid zoom" style="max-width:100%" alt="avatar.png">
+                                        <img src="{{asset('backend/img/avatar.png')}}" class="img-fluid rounded-circle" style="max-width:50px" alt="avatar.png">
                                     @endif
                                 </td>
                                 <td>{{(($user->created_at)? $user->created_at->diffForHumans() : '')}}</td>
+                                <td>{{$user->role}}</td>
                                 <td>
                                     @if($user->status=='active')
                                         <span class="badge badge-success">{{$user->status}}</span>

@@ -22,7 +22,6 @@
 </div>
 
 <div class="container">
-
     <!-- Girls Chart -->
     <canvas id="girlsChart"></canvas>
 
@@ -39,7 +38,6 @@
     <canvas id="skillsChart"></canvas>
 </div>
 
-<script src="{{ asset('js/app.js') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
     // Girls Chart
@@ -50,7 +48,9 @@
             labels: {!! json_encode($girls->pluck('name')) !!},
             datasets: [{
                 label: 'Age of Girls',
-                data: {!! json_encode($girls->pluck('age')) !!},
+                data: {!! json_encode($girls->pluck('date_of_birth')->map(function($date) {
+                    return \Carbon\Carbon::parse($date)->age;
+                })) !!},
                 backgroundColor: 'rgba(255, 99, 132, 0.2)',
                 borderColor: 'rgba(255, 99, 132, 1)',
                 borderWidth: 1
@@ -155,7 +155,7 @@
     var materialsChart = new Chart(materialsCtx, {
         type: 'bar',
         data: {
-            labels: {!! json_encode($materials->pluck('name')) !!},
+            labels: {!! json_encode($materials->pluck('material_name')) !!},
             datasets: [{
                 label: 'Materials Quantity',
                 data: {!! json_encode($materials->pluck('quantity')->map(function($item) { return (int) $item; })) !!},
@@ -178,7 +178,7 @@
     var skillsChart = new Chart(skillsCtx, {
         type: 'radar',
         data: {
-            labels: {!! json_encode($skills->pluck('name')) !!},
+            labels: {!! json_encode($skills->pluck('skill_name')) !!},
             datasets: [{
                 label: 'Skill Levels',
                 data: {!! json_encode($skills->pluck('level')->map(function($item) { return (int) $item; })) !!},

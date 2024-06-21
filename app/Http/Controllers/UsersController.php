@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use App\Models\User;
+use Illuminate\Support\Str;
 class UsersController extends Controller
 {
     /**
@@ -36,36 +36,32 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request,
-        [
-            'name'=>'string|required|max:100',
-            'email'=>'string|required|unique:users',
-            'password'=>'string|required',
-            'role'=>'required|in:admin,user',
-            'status'=>'required|in:active,inactive',
-            'photo'=>'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
+        $this->validate($request, [
+            'name' => 'string|required|max:100',
+            'email' => 'string|required|unique:users',
+            'password' => 'string|required',
+            'role'=>'required|in:admin,content-creator',
+            'status' => 'required|in:active,inactive',
+            'photo' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
         ]);
-        // dd($request->all());
-        $data=$request->all();
+
+        $data = $request->all();
         $data['password']=Hash::make($request->password);
         $data['name'] = $request->get('name');
         $data['email'] = $request->get('email');
         $data['role'] = $request->get('role');
         $data['status'] = $request->get('status');
-
         $path = $request->file('photo')->store('public/images');
         $data['photo'] = $path; 
-        // dd($data);
+
         $status=User::create($data);
-        // dd($status);
         if($status){
-            request()->session()->flash('success','Successfully added user');
+            request()->session()->flash('success','User successfully added');
         }
         else{
-            request()->session()->flash('error','Error occurred while adding user');
+            request()->session()->flash('error','Error occurred while adding partner');
         }
         return redirect()->route('users.index');
-
     }
 
     /**
@@ -105,39 +101,34 @@ class UsersController extends Controller
         $this->validate($request, [
             'name' => 'string|required|max:100',
             'email' => 'nullable|email|unique:users,email,' . $id,
-            'role' => 'required|in:admin,user',
+            'role' => 'required|in:admin,content-creator',
             'status' => 'required|in:active,inactive',
             'photo' => 'nullable|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
         ]);
 
-        $data = $request->except(['_token', '_method']); // Exclude unnecessary data
-
+        $data = $request->all();
         $data['name'] = $request->get('name');
+        $data['email'] = $request->get('email');
         $data['role'] = $request->get('role');
         $data['status'] = $request->get('status');
 
-        // Handle email update only if it's different and not null
-        if ($request->filled('email') && $request->input('email') !== $user->email) {
-            $data['email'] = $request->get('email');
-        }
-
-        // Handle photo update if provided
         if ($request->hasFile('photo')) {
             $path = $request->file('photo')->store('public/images');
             $data['photo'] = $path;
+        } else {
+            unset($data['photo']);
         }
 
         $status = $user->fill($data)->save();
 
         if ($status) {
-            request()->session()->flash('success', 'User Successfully updated');
+            request()->session()->flash('success', 'User successfully updated');
         } else {
-            request()->session()->flash('error', 'Error occurred while updating');
+            request()->session()->flash('error', 'Error occurred while updating user');
         }
 
         return redirect()->route('users.index');
     }
-
 
     /**
      * Remove the specified resource from storage.
